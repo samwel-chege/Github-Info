@@ -1,9 +1,11 @@
 <div class="container-fluid">
-    <app-user-form (searchOutput)= "repoSearch($event)"></app-user-form>
+  <form class="form-inline active-cyan-4">
+    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Enter Github Username...." #repoName id="repoName" name="repoName" aria-label="Search">
+    <button class="btn btn-info  btn-sm" (click) = "repoSearch(repoName.value)"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+  </form>
       <div class="container">
           <div class="container allrepos">
-              <div class="card" appHighlight *ngForOf="let repository of repo" style="width: 22rem;" class="repo" >
-                <!-- appHighlight *ngFor="let repository of repo" style="width: 22rem;" class="repo" -->
+              <div class="card" appHighlight *ngFor="let repository of repos" style="width: 22rem;" class="repo" >
                 <div class="card-body">
                   <h5 class="card-title">Repo Name: &nbsp;{{repository.name}} </h5>
                   <div class="card-text">

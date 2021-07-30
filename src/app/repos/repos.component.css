@@ -1,29 +1,32 @@
-/*body*/
-.container{
-    margin-top: 5rem;
-}
-p {
-    text-indent: 2rem;
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-.btn{
-    margin-top: 30px;
-    background-color: #056b5b;
-}
-
-.seeMorebtn{
-    text-align: center;
-}
-.display{
-    float: left;
-    margin-bottom: 0.3rem;
-}
-
-/*user form*/
-.search-form p {
-    font-size: 30px;
-    margin: 0;
-    justify-content: left;
-    align-items: left;
-    /*position: sticky;*/
-}
+.allrepos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  hr{
+    background-color: rgb(11, 199, 199);
+    height: 1px;
+  }
+  .desc{
+    min-height: 95px;
+  }
+  .top{
+    font-weight: 550;
+  }
+  .btn-group{
+    margin-left: 13px;
+  }
+  #visit a{
+    text-decoration: none;
+    color: beige;
+  }
+  .repo{
+    background-color:rgba(161, 245, 238, 0.705);
+    color: black;
+    margin-bottom: 2%;
+    border-radius: 4px; 
+  }
+  .form-control::placeholder{
+    color: white;
+  }
+  

@@ -1,38 +1,14 @@
-input {
-    width: 100%;
-   padding: 12px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
-   box-sizing: border-box;
-   margin-top: 6px;
-   margin-bottom: 16px;
-}
-
-
-input[type=submit] {
-   background-color: #056b5b;
-   color: white;
-   text-align: center;
-   /* width: 50%; */
-}
-
-
-button {
-   background-color: #056b5b;
-   color: white;
-   padding: 14px 20px;
-   margin: 8px 0;
-   border: none;
-   cursor: pointer;
-   /* width: 100%; */
-   opacity: 0.9;
-}
-
-
-
-form {
-   background-color: #f1f1f1;
-   padding: 20px;
-   width: 100vh;
-    /*height: 100%; */
-}
+.container{
+   padding-top:1%;
+  }
+  .active-cyan-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+    }
+    .active-cyan input[type=text] {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+    }
+    input{
+      width: 100%;
+    }

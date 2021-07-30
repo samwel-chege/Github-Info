@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from '../Interfaces/user';
-import { Repository } from '../Interfaces/Repo';
+import { Repos } from '../Interfaces/Repo';
 
 
 
@@ -11,15 +11,16 @@ import { Repository } from '../Interfaces/Repo';
 })
 export class UserService {
  foundUser: User;
- allRepos: Repository;
+ allRepos: Repos;
+ repoItems:any;
 
   constructor(private http: HttpClient) { 
     this.foundUser = new User("","","","",0,0,0,"",new Date);
-    this.allRepos = new Repository("","","",new Date,0,0,"");
+    this.allRepos = new Repos("","","",new Date,0,0,"");
   }
   searchUser(searchName: string) {
    
-    interface Response {
+    interface ApiResponse {
       url:string,
       login: string;
       html_url:string;
@@ -32,10 +33,18 @@ export class UserService {
     }
 
     return new Promise((resolve:any, reject) => {
-      this.http.get<Response>('https://api.github.com/users/'+searchName+'?access_token='+environment.apiKey).toPromise().then(
+      this.http.get<ApiResponse>('https://api.github.com/users/'+searchName).toPromise().then(
         (result) => {
-          this.foundUser = result;
-          console.log(this.foundUser);
+         this.foundUser.url = result.url;
+         this.foundUser.login = result.login;
+         this.foundUser.html_url = result.html_url;
+         this.foundUser.location = result.location;
+         this.foundUser.public_repos = result.public_repos;
+         this.foundUser.followers = result.followers;
+         this.foundUser.following = result.following;
+         this.foundUser.avatar_url = result.avatar_url;
+         this.foundUser.created_at = result.created_at;
+          console.log(result);
           resolve();
         },
         (error) => {
@@ -46,19 +55,16 @@ export class UserService {
     });
   }
   getRepos(searchName:any){
-    interface Repos{
-      name:string;
-      html_url:string;
-      description:string;
-      forks:number;
-      watchers_count:number;
-      language:string;
-      created_at:Date;
+    interface ApiResponse {
+      repos:[]
+
     }
+    
     return new Promise((resolve:any,reject)=>{
-      this.http.get<Repos>('https://api.github.com/users/'+searchName+"/repos?order=created&sort=asc?access_token="+environment.apiKey).toPromise().then(
+      this.http.get<ApiResponse>('https://api.github.com/users/'+searchName+'/repos?').toPromise().then(
         (results) => {
-          this.allRepos = results;
+          this.repoItems = results;
+          console.log(results)
           resolve();
         },
         (error) => {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../Services/user.service';
-import { Repository } from '../Interfaces/Repo';
+import { Repos } from '../Interfaces/Repo';
 import { User } from '../Interfaces/user';
 
 
@@ -11,32 +11,41 @@ import { User } from '../Interfaces/user';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  user!: User;
-  repo!: Repository;
+  foundUser!: User;
+  repo!: Repos[];
 
-  constructor(public myService: UserService, private repoService: UserService) { }
+  constructor(private myService: UserService, public repoService: UserService) { }
 
-  searchs(searchName:any) {
-    this.myService.searchUser(searchName).then(
-      (success)=>{
-        this.user = this.myService.foundUser;
-      },
-      (error)=>{
-        console.log(error)
-      }
-    );
-      this.repoService.getRepos(searchName).then(
-        (results)=>{
-          this.repo =this.repoService.allRepos
-          console.log(this.repo);
-        },
-        (error)=>{
-          console.log(error);
-        }
-      );
-  }
+  searchs(searchName:string) {
+    if (searchName !== "" ){
+      this.myService.searchUser(searchName)
+      this.repoService.getRepos(searchName)
+      console.log(searchName)
+    }
+    
+    
+    // this.myService.searchUser(searchName).then(
+    //   (success)=>{
+    //     this.user = this.myService.foundUser;
+    //   },
+    //   (error)=>{
+    //     console.log(error)
+    //   }
+    // );
+    //   this.repoService.getRepos(searchName).then(
+    //     (results:any)=>{
+    //       this.repo.push(results)
+    //       console.log(this.repo);
+    //     },
+    //     (error)=>{
+    //       console.log(error);
+    //     }
+    //   );
+   }
+  
 
   ngOnInit(): void {
+    this.foundUser = this.myService.foundUser;
     this.searchs('samwel-chege');
   }
 

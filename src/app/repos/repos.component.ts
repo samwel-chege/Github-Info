@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Repository } from '../Interfaces/Repo';
 import { UserService } from '../Services/user.service';
 
 @Component({
@@ -9,20 +9,21 @@ import { UserService } from '../Services/user.service';
 })
 export class ReposComponent implements OnInit {
 
-  repo?: Repository;
-  constructor(public repoService: UserService){}
+  repos: any[]=[];
+  constructor(private repoService: UserService, private http: HttpClient){}
 
-  repoSearch(searchName:any){
-    this.repoService.getRepos(searchName).then(
-      (results)=>{
-        this.repo =this.repoService.allRepos
-        console.log(this.repo);
-      },
-      (error)=>{
-        console.log(error);
+  repoSearch(input: string){
+    this.repoService.getRepos(input).then (
+      (data:any) => {
+        this.repos = data.items;
+        console.log(data)
+
+      }), (error: any) =>{
+        
       }
-    );
+   
   }
+ 
 
   ngOnInit() {
     this.repoSearch('samwel-chege');
